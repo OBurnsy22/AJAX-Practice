@@ -5,6 +5,8 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <!-- Include for axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- Local CSS file -->
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
         <title>Getting Started With Ajax</title>
     </head>
     <body>
@@ -30,11 +32,34 @@
 
         <!-- attempt at retrieving data from api -->
         <button onclick="getData()">Get Data</button>
+
+        <break></break>
+
+
+
+
+        <form>
+            <!-- attempt at implementing calendar date picker -->
+            <label for="start">Start date:</label> <!-- The 'for' field specifies the id of the form element this label is bound to -->
+            <!-- Make the start date be when audit bot was first deployed -->
+            <input type="date" id="start" name="trip-start" min="2018-01-01">
+            <label for="end">End date:</label>
+            <input type="date" id="end" name="trip-end" min="2018-01-01">
+            <input type="submit" value="Submit" onclick="updateChartData()">
+        </form>
+
     </body>
 
     <script type="text/javascript">
 
-    //refer to this video: https://www.youtube.com/watch?v=bI5jpueiCWw&t=823s
+        function updateChartData () {
+            //retrieve the data from the html form fields
+            console.log(document.getElementById('start').value);
+            console.log(document.getElementById('end').value);
+
+        }
+
+        //refer to this video: https://www.youtube.com/watch?v=bI5jpueiCWw&t=823s
         function getData() {
             console.log("Inside get data function");
             // axios.<method> will now provide autocomplete and parameter typings
