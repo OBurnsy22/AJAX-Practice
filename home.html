@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Include for vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <!-- Include for axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>Getting Started With Ajax</title>
+    </head>
+    <body>
+        <button onclick="ajaxFunction()">Update Info Below</button>
+        <div id="content">
+            {{ message }}
+        </div>
+        <break></break>
+
+        <!-- the v-bind attribute is a 'directive' that apply special reactive behavior to whatever they are bound to-->
+        <div id="app-2">
+            <span v-bind:title="message">
+              Hover your mouse over me for a few seconds
+              to see my dynamically bound title!
+            </span>
+        </div>
+
+        <!-- example of a conditional using the v- bind -->
+        <button onclick="updateVisibility()">Hide Line Below</button>
+        <div id="app-3">
+            <span v-if="seen">Now you see me</span>
+        </div>
+
+        <!-- attempt at retrieving data from api -->
+        <button onclick="getData()">Get Data</button>
+    </body>
+
+    <script type="text/javascript">
+
+    //refer to this video: https://www.youtube.com/watch?v=bI5jpueiCWw&t=823s
+        function getData() {
+            console.log("Inside get data function");
+            // axios.<method> will now provide autocomplete and parameter typings
+            const axios = require('axios').default;
+            //console.log("After require statement");
+
+            axios.get('https://jsonplaceholder.typicode.com/users')
+                //on successfull retrieval of data
+                .then(function (response) {
+                    console.log(response);
+                })
+                //on failure to retreive data
+                .catch(function (error) {
+                    console.log(errror);
+                })
+        }
+
+        //updates message div tag when button is pressed
+        function ajaxFunction() {
+            var update = new Vue({
+                el: '#content',
+                data: {
+                    message: 'Hello There'
+                }
+            })
+        }
+
+        //reactive behavior to whatever app-2 is bound to
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: 'You loaded this page on ' + new Date().toLocaleString()
+            }
+        })
+
+        //example of a conditional to update the transparency of an attribute
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: true
+            }
+        })
+
+        function updateVisibility() {
+            console.log(app3.data.seen);
+            /*
+            if(app3.data.seen) {
+                app3.data.seen = false;
+            } else {
+                app3.data.seen = true;
+            }*/
+        }
+    </script>
+</html>
