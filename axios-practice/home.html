@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--<script type="module" src="/node_modules/axios/dist/axios.min.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="target">
+            <p> Lets update this data </p>
+        </div>
+        <input type="Submit" onclick="getCatData()" value="GET Request">
+        <input type="Submit" onclick="getShorthandCatData()" value="Shorthand GET Request">
+    </body>
+    <script>
+        /* NOTES
+            - Wrap axios calls in try/catch incase any errors/exceptions are thrown
+            - GET is used to request data from a specified resource
+            - POST submits data to be processed, including updating and adding data
+        */
+
+        // GET request
+        async function getCatData() {
+            const reponse = await axios ({
+                url: "https://cat-fact.herokuapp.com/facts",
+                method: "GET"
+            })
+            console.log(reponse.data);
+        }
+
+        // shorthand GET request
+        async function getShorthandCatData() {
+            try {
+                const response = await axios.get("https://cat-fact.herokuapp.com/facts");
+                console.log(response.data[1].status);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        /*
+        HTTP headers let the client and the server pass additional informaiton with an HTTP
+        request or reponse
+        */
+        // Example of get request with sending headers
+        async function headers() {
+            try {
+                const resopnse = await axios.get("https://cat-fact.herokuapp.com/facts", {
+                    headers: {"header-name":"header-value"}
+                })
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        /*
+        Many API's allow you to send parameters in GET requests, you can eiter include 
+        the parameter as a query string or you can use the parameter property
+        */
+        // Example of GET request with parameters
+        async function getWithParams() {
+            try {
+                const response = await axios.get("https://urlhere.com/?date=2020-05-15");
+                console.log(reponse.data);
+            } catch (e) {
+                console.log(e);
+            }
+
+            try {
+                const respose = await axios.get("https://urlhere.com/?date=2020-05-15", {
+                    params: {
+                        date:"2020-05-15"
+                    }
+                })
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        // Example of POST request, you can add headers and parameters the same way as you do it with GET
+        async function post() {
+            try {
+                const reponse = await axios.post("https://urlhere.com/?date=2020-05-15")
+                console.log(reponse.data);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
+</html>

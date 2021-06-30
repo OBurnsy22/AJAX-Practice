@@ -4,7 +4,7 @@
         <!-- Include for vue.js -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <!-- Include for axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="node_modules/axios/dist/axios.min.js"></script>
         <!-- Local CSS file -->
         <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
         <title>Getting Started With Ajax</title>
@@ -54,9 +54,14 @@
 
         function updateChartData () {
             //retrieve the data from the html form fields
-            console.log(document.getElementById('start').value);
-            console.log(document.getElementById('end').value);
-
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+            //check if either field was left blank, inform the user if so
+            if(start == '' || end == '') {
+                window.alert("Start or end date entry invalid.");
+                return;
+            } 
+            
         }
 
         //refer to this video: https://www.youtube.com/watch?v=bI5jpueiCWw&t=823s
