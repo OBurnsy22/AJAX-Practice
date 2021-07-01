@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body onload="javascript:printData()">
+        <p>LETS SEE IF THIS UPDATES</p>
+    </body>
+    <script>
+
+        //test API: https://api.github.com/users/jameshibbard
+        //could use setInterval() function, since it is asynchronous
+
+        async function fetchData() {
+            console.log("In fetch data funciton");
+            try {
+                const res = await fetch('https://api.github.com/users/jameshibbard');
+                const data = await res.json();
+                console.log(data);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+        function printData() {
+            console.log("In print data function");
+            //should make the function call every 10 seconds
+            setInterval(fetchData, 10000);
+        }
+    </script>
+</html>
